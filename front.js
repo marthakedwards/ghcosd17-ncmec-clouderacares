@@ -8,53 +8,143 @@ document.addEventListener("DOMContentLoaded", function(event) {
     zoom: 3
   });
 
-  // data scheme we are using
-  var dataSet = [
-    {
-      location: {
-        state: "Florida",
-        postalCode: "32836",
-        city: "Orlando",
-        county: "",
-        coordinates: [-81.483570, 28.426323]
-      },
-      abductor: {
-        race: "White",
-        gender: "Male",
-        age: "25",
-        lure: ""
-      },
-      vehicle: {
-        type: "Van",
-        color: "Black"
-      },
-      abductee: {
-        gender: "Female",
-        age: "6",
-        race: "Hispanic"
-      },
-      date: "01/02/16",
-      time: "9:00 PM"
-    },
-  ]
-
-  var features = [];
-
-  dataSet.forEach(function(element) {
-    features.push({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: element.location.coordinates
-      },
-      properties: element
-    })
-  });
-
   var geojson = {
-    type: 'FeatureCollection',
-    features: features
-  };
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Lure Animal": "0",
+          "Child Approximate Age 1": "9",
+          "Lure Candy": "0",
+          "Child Approximate Age 2": "",
+          "Child Approximate Age 3": "",
+          "Child Approximate Age 4": "",
+          "Incident Location": "Russo St & Social St",
+          "Incident State": "RI",
+          "Child Approximate Age 5": "",
+          "Child Approximate Age 6": "",
+          "Lure Other Detail": "None",
+          "Child Race 1": "Unknown",
+          "Child Race 2": "",
+          "Child Race 3": "",
+          "Offender Race 1": "Hispanic",
+          "Child Race 4": "",
+          "Offender Race 2": "",
+          "Child Race 5": "",
+          "Offender Race 3": "",
+          "Child Race 6": "",
+          "Lure Other": "-1",
+          "Vehicle Type": "",
+          "Vehicle Color": "White",
+          "Child ID 1": "551573",
+          "Child ID 2": "",
+          "Status": "Closed",
+          "How Got Away": "Other",
+          "Child ID 3": "",
+          "Incident Zip": "2904",
+          "Child ID 4": "",
+          "Offender Perceived Age 1": "",
+          "Child ID 5": "",
+          "Offender Perceived Age 2": "",
+          "Child ID 6": "",
+          "Child Gender 1": "Male",
+          "Offender Perceived Age 3": "",
+          "Child Gender 2": "",
+          "Incident County": "Providence",
+          "Child Gender 3": "",
+          "Offender Gender 1": "Male",
+          "Child Gender 4": "",
+          "Case Number": "1260531",
+          "Incident City": "Providence",
+          "Offender Gender 2": "",
+          "Child Gender 5": "",
+          "Offender Gender 3": "",
+          "Source": "Internet",
+          "Incident Time": "12:00 AM",
+          "Child Gender 6": "",
+          "Lure Ride": "0",
+          "Lure Money": "0",
+          "Incident Date": "1/4/12",
+          "How Got Away Detail": "Walked away"
+        },
+        "geometry": {
+          "coordinates": [
+            43.8473,
+            -77.7865
+          ],
+          "type": "Point"
+        },
+        "id": "89786e41ef9e4b8dd30a75f1388dfb19"
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Lure Animal": "0",
+          "Child Approximate Age 1": "15",
+          "Lure Candy": "0",
+          "Child Approximate Age 2": "",
+          "Child Approximate Age 3": "",
+          "Child Approximate Age 4": "",
+          "Incident Location": "Seaview Ave & Grant St",
+          "Incident State": "CT",
+          "Child Approximate Age 5": "",
+          "Child Approximate Age 6": "",
+          "Lure Other Detail": "None",
+          "Child Race 1": "Unknown",
+          "Child Race 2": "",
+          "Child Race 3": "",
+          "Offender Race 1": "Unknown",
+          "Child Race 4": "",
+          "Offender Race 2": "",
+          "Child Race 5": "",
+          "Offender Race 3": "",
+          "Child Race 6": "",
+          "Lure Other": "-1",
+          "Vehicle Type": "Van",
+          "Vehicle Color": "Burgundy",
+          "Child ID 1": "551489",
+          "Child ID 2": "",
+          "Status": "Closed",
+          "How Got Away": "Unknown",
+          "Child ID 3": "",
+          "Incident Zip": "6610",
+          "Child ID 4": "",
+          "Offender Perceived Age 1": "Unknown",
+          "Child ID 5": "",
+          "Offender Perceived Age 2": "",
+          "Child ID 6": "",
+          "Child Gender 1": "Female",
+          "Offender Perceived Age 3": "",
+          "Child Gender 2": "",
+          "Incident County": "Fairfield",
+          "Child Gender 3": "",
+          "Offender Gender 1": "Male",
+          "Child Gender 4": "",
+          "Case Number": "1260468",
+          "Incident City": "Bridgeport",
+          "Offender Gender 2": "",
+          "Child Gender 5": "",
+          "Offender Gender 3": "",
+          "Source": "Internet",
+          "Incident Time": "9:00 PM",
+          "Child Gender 6": "",
+          "Lure Ride": "0",
+          "Lure Money": "0",
+          "Incident Date": "1/1/12",
+          "How Got Away Detail": ""
+        },
+        "geometry": {
+          "coordinates": [
+            40.8473,
+            -73.7865
+          ],
+          "type": "Point"
+        },
+        "id": "9b341aa24c9b33c9c4e11f84cb23df32"
+      }
+    ],
+    "type": "FeatureCollection"
+  }
 
   // add markers to map
   geojson.features.forEach(function(marker) {
@@ -67,13 +157,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     new mapboxgl.Marker(el)
       .setLngLat(marker.geometry.coordinates)
       .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      // .setHTML('<h3>Attempted abduction</h3>'))
       .setHTML(
         '<h3>Attempted abduction</h3>' +
-        '<p>Time: ' + marker.properties.date + ', ' + marker.properties.time + '</p>' +
-        '<p>Location: ' + marker.properties.location.city + ', ' + marker.properties.location.state + ', ' + marker.properties.location.postalCode + '</p>' +
-        '<p>Abductor information: ' + marker.properties.abductor.race + ', ' + marker.properties.abductor.gender + ', ' + marker.properties.abductor.age + ' years old' + '</p>' +
-        '<p>Vehicle description: ' + marker.properties.vehicle.type + ', ' + marker.properties.vehicle.color + '</p>' + 
-        '<p>Abductee information: ' + marker.properties.abductee.race + ', ' + marker.properties.abductee.gender + ', ' + marker.properties.abductee.age + '</p>'
+        '<p>Time: ' + marker.properties["Incident Date"] + ', ' + marker.properties["Incident Time"] + '</p>' +
+        '<p>Location: ' + marker.properties["Incident Location"] + ', ' + marker.properties["Incident City"] + ', ' + marker.properties["Incident State"] + ', ' + marker.properties["Incident Zip"] + '</p>' +
+        '<p>Offender information: ' + marker.properties["Offender Race 1"] + ', ' + marker.properties["Offender Gender 1"] + ', ' + marker.properties["Offender Perceived Age 1"] + ' years old' + '</p>' +
+        '<p>Vehicle description: ' + marker.properties["Vehicle Type"] + ', ' + marker.properties["Vehicle Color"] + '</p>' + 
+        '<p>Child information: ' + marker.properties["Child Race 1"] + ', ' + marker.properties["Child Gender 1"] + ', ' + marker.properties["Child Approximate Age 1"] + '</p>'
       ))
       .addTo(map);
   });
