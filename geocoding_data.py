@@ -1,5 +1,8 @@
+import os
 from mapbox import Geocoder
 from time import sleep
+
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 
 def main():
     input_filename = 'Hackathon Attempted Abduction Data Set.csv'
@@ -37,7 +40,7 @@ def get_output_row(line, longitude, latitude):
 # uses Mapbox's geocoder api to get latitude
 # and longitude coordinates from given location
 def get_coordinates_for_location(location):
-    geocoder = Geocoder()
+    geocoder = Geocoder(access_token=ACCESS_TOKEN)
     response = geocoder.forward(location, country=['us'], limit=1)
     # sleep to avoid api rate limit
     sleep(0.05)
